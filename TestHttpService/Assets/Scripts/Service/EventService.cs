@@ -7,6 +7,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Linq;
 using System.Net;
+using System.Threading;
 
 public class EventService : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class EventService : MonoBehaviour
 
 	private List<Event> _cachedEvents = new List<Event>();
 	private List<Event> _eventsToSend = new List<Event>();
+
+	private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
 	private string _saveFilePath;
 	private float _nextSendTime;
@@ -76,6 +79,12 @@ public class EventService : MonoBehaviour
 		}
 	}
 
+	private void OnDestroy()
+	{
+		_cancellationTokenSource.Cancel();
+		_cancellationTokenSource.Dispose();
+	}
+
 	private void UpdateCooldown()
 	{
 		if (!_cooldownStarted)
@@ -120,7 +129,7 @@ public class EventService : MonoBehaviour
 		{
 			Debug.Log($"Try send events: {requestString}");
 
-			var response = await _httpClient.SendAsync(request);
+			var response = await _httpClient.SendAsync(request, _cancellationTokenSource.Token);
 
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
