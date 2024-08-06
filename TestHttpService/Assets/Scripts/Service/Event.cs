@@ -5,12 +5,12 @@ internal class Event
 	[JsonProperty("type")]
 	public string Type { get; }
 
-	[JsonProperty("content")]
-	public string Content { get; }
+	[JsonProperty("data")]
+	public string Data { get; }
 
-	public Event(string type, string content)
+	public Event(string type, string data)
 	{
 		Type = type;
-		Content = content;
+		Data = data;
 	}
 }

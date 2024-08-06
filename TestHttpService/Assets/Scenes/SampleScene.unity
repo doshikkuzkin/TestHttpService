@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1293907687}
   - component: {fileID: 1293907686}
+  - component: {fileID: 1293907688}
   m_Layer: 0
   m_Name: EventService
   m_TagString: Untagged
@@ -235,6 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080660ae2054ba042a5bb6ca7d8b1803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _serviceUrl: 
+  _cooldownMs: 3000
+  _timeoutMs: 2000
+  _saveFileName: events.txt
 --- !u!4 &1293907687
 Transform:
   m_ObjectHideFlags: 0
@@ -250,3 +255,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293907688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293907685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0283a11082baf14dbe42791a93f3a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventService: {fileID: 1293907686}
+  _type: 
+  _data: 
